@@ -4,7 +4,7 @@
 {
     "name": "Account - SMS",
     "summary": "Send text messages from invoice to payment",
-    "description": "Send text messages from invoice to payment",
+    "description": "Send text messages to custumers from invoice to payment",
     "category": "Hidden",
     "version": "1.0",
     "depends": ["account", "sms"],
