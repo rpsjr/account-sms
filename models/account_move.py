@@ -23,9 +23,9 @@ class Move(models.Model):
         """Send an SMS text reminder to custumers pay invoices"""
 
         template_id = self._confirmation_sms_account_template(template_xmlid)
-        #_logger.info(f"################ template_id {template_id}")
+        # _logger.info(f"################ template_id {template_id}")
         invoices = self.search(invoice_filters) or None
-        #_logger.info(f"################ invoices {invoices}")
+        # _logger.info(f"################ invoices {invoices}")
         if invoices:
             for posted_invoice in invoices:
                 posted_invoice._message_sms_with_template(
@@ -44,7 +44,7 @@ class Move(models.Model):
             "account_sms.sms_template_data_invoice_sent",
             [
                 ("payment_journal_id", "=", 18),  # boleto ineter
-                ("state", "=", "posted"),
+                ("invoice_payment_state", "!=", "paid")("state", "=", "posted"),
                 ("invoice_date", "=", fields.Datetime.now().date()),
             ],
         )
@@ -52,8 +52,8 @@ class Move(models.Model):
         self._reusable_sms_call(
             "account_sms.sms_template_data_invoice_due_date",
             [
-                # ("payment_journal_id", "=", 18),  # boleto ineter
-                ("state", "=", "posted"),
+                ("payment_journal_id", "=", 18),  # boleto ineter
+                ("invoice_payment_state", "!=", "paid")("state", "=", "posted"),
                 ("invoice_date_due", "=", fields.Datetime.now().date()),
             ],
         )
@@ -62,11 +62,11 @@ class Move(models.Model):
             "account_sms.sms_template_data_invoice_overdue_1",
             [
                 ("payment_journal_id", "=", 18),  # boleto ineter
-                ("state", "=", "posted"),
+                ("invoice_payment_state", "!=", "paid")("state", "=", "posted"),
                 (
                     "invoice_date_due",
                     "=",
-                    fields.Datetime.now().date() + timedelta(days=1),
+                    fields.Datetime.now().date() - timedelta(days=1),
                 ),
             ],
         )
@@ -75,11 +75,11 @@ class Move(models.Model):
             "account_sms.sms_template_data_invoice_overdue_2",
             [
                 ("payment_journal_id", "=", 18),  # boleto ineter
-                ("state", "=", "posted"),
+                ("invoice_payment_state", "!=", "paid")("state", "=", "posted"),
                 (
                     "invoice_date_due",
                     "=",
-                    fields.Datetime.now().date() + timedelta(days=2),
+                    fields.Datetime.now().date() - timedelta(days=2),
                 ),
             ],
         )
@@ -88,11 +88,11 @@ class Move(models.Model):
             "account_sms.sms_template_data_invoice_overdue_3",
             [
                 ("payment_journal_id", "=", 18),  # boleto ineter
-                ("state", "=", "posted"),
+                ("invoice_payment_state", "!=", "paid")("state", "=", "posted"),
                 (
                     "invoice_date_due",
                     "=",
-                    fields.Datetime.now().date() + timedelta(days=3),
+                    fields.Datetime.now().date() - timedelta(days=3),
                 ),
             ],
         )
