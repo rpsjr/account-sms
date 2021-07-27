@@ -29,7 +29,7 @@
                 Babur: ${object.partner_id.name}, parece que sua locação está vencida. Regularize seus pagamentos e evite o bloqueio do veículo.
             </field>
         </record>
-        <record id="sms_template_data_invoice_due_date" model="sms.template">
+        <record id="sms_template_data_invoice_due_date_3" model="sms.template">
             <field name="name">Invoice overdue d+3: Alert by SMS Text Message</field>
             <field name="model_id" ref="account.model_account_move"/>
             <field name="body">
