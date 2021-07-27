@@ -44,7 +44,8 @@ class Move(models.Model):
             "account_sms.sms_template_data_invoice_sent",
             [
                 ("payment_journal_id", "=", 18),  # boleto ineter
-                ("invoice_payment_state", "!=", "paid")("state", "=", "posted"),
+                ("invoice_payment_state", "!=", "paid"),
+                ("state", "=", "posted"),
                 ("invoice_date", "=", fields.Datetime.now().date()),
             ],
         )
@@ -53,7 +54,8 @@ class Move(models.Model):
             "account_sms.sms_template_data_invoice_due_date",
             [
                 ("payment_journal_id", "=", 18),  # boleto ineter
-                ("invoice_payment_state", "!=", "paid")("state", "=", "posted"),
+                ("invoice_payment_state", "!=", "paid"),
+                ("state", "=", "posted"),
                 ("invoice_date_due", "=", fields.Datetime.now().date()),
             ],
         )
@@ -62,7 +64,8 @@ class Move(models.Model):
             "account_sms.sms_template_data_invoice_overdue_1",
             [
                 ("payment_journal_id", "=", 18),  # boleto ineter
-                ("invoice_payment_state", "!=", "paid")("state", "=", "posted"),
+                ("invoice_payment_state", "!=", "paid"),
+                ("state", "=", "posted"),
                 (
                     "invoice_date_due",
                     "=",
@@ -75,7 +78,8 @@ class Move(models.Model):
             "account_sms.sms_template_data_invoice_overdue_2",
             [
                 ("payment_journal_id", "=", 18),  # boleto ineter
-                ("invoice_payment_state", "!=", "paid")("state", "=", "posted"),
+                ("invoice_payment_state", "!=", "paid"),
+                ("state", "=", "posted"),
                 (
                     "invoice_date_due",
                     "=",
@@ -88,7 +92,8 @@ class Move(models.Model):
             "account_sms.sms_template_data_invoice_overdue_3",
             [
                 ("payment_journal_id", "=", 18),  # boleto ineter
-                ("invoice_payment_state", "!=", "paid")("state", "=", "posted"),
+                ("invoice_payment_state", "!=", "paid"),
+                ("state", "=", "posted"),
                 (
                     "invoice_date_due",
                     "=",
