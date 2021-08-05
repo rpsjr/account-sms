@@ -46,7 +46,11 @@ class Move(models.Model):
                 ("payment_journal_id", "=", 18),  # boleto ineter
                 ("invoice_payment_state", "!=", "paid"),
                 ("state", "=", "posted"),
-                ("invoice_date", "=", fields.Datetime.now().date()),
+                (
+                    "invoice_date_due",
+                    "=",
+                    fields.Datetime.now().date() - timedelta(days=3),
+                ),
             ],
         )
         ### Invoice due date: Alert by SMS Text Message
